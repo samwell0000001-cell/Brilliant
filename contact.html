@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        <p>Fill The Form Before i Respond</p>
+    </header>
+    <main>
+        <form>
+           
+            <label>Your name</label>
+            <input type="text"
+            placeholder="Enter Your name" >
+           
+            <label>Your email</label>
+            <input type="text"
+           placeholder="Enter Your email" >
+
+           <label>Your message</label>
+           <textarea  placeholder="Write here">
+           </textarea>
+
+           <button>Send message</button>
+        
+        
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2026 Yahya Bobbo</p>
+    </footer>
+    <script>
+     const EMAILJS_Public_KeY = "R0AAcwIYxYjTbwHlR"; 
+      const EMAILJS_SERVICE_ID = "service_eey3t9g"; 
+     const EMAILJS_TEMPLATE_ID = "template_zf500vf";  
+
+     emailjs,init({Public_KeY:EMAILJS_Public_KeY});
+
+     document,getElementBYId("contact form").addEventlistner("submit",async (event) => {
+        event,preventDefault();
+        const form = event,currentTarget;
+        const button = form,querySelector("button");
+        const status = document,getElementBYId(form-status); 
+
+        button.disabled = true;
+        button.textContent =" Sending...";
+        status.textContent = "";
+          status.textName = "";
+
+          try{
+            await emailjs,sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, FORM);
+            status.textContent = "";
+            status.className = "success";
+            form.reset();
+          } catch (error) {
+            console.error("EMAILJS error:",error);
+            status.textContent = "Something went wrong. please try again.";
+            status.className = "error";
+          } finally {
+            
+        button.disabled = false;
+        button.textContent = "Send message";
+          }
+        });       
+    </script>
+</body>
+</html>
